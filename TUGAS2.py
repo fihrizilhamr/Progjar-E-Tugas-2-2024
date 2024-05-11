@@ -23,10 +23,11 @@ class ProcessTheClient(threading.Thread):
             if data:
                 # request = data.decode().upper() # Jika ingin memasukkan lowercase
                 request = data.decode()
+                request = request.replace(" ", "")
 
-                if request.split()[0] == ("TIME") and request.endswith("\r\n"):
+                if request == ("TIME\r\n"):
                     self.connection.sendall(f"JAM {time.strftime('%H:%M:%S', time.localtime())}\r\n".encode())
-                elif request.split()[0] == ("QUIT") and request.endswith("\r\n"):
+                elif request == ("QUIT\r\n"):
                     break 
                 else:
                     self.connection.sendall(f"\"{data}\" IS AN INVALID REQUEST\n".encode())
