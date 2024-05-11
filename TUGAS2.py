@@ -23,7 +23,6 @@ class ProcessTheClient(threading.Thread):
             if data:
                 # request = data.decode().upper() # Jika ingin memasukkan lowercase
                 request = data.decode()
-                request = request.replace(" ", "")
 
                 if request == ("TIME\r\n"):
                     self.connection.sendall(f"JAM {time.strftime('%H:%M:%S', time.localtime())}\r\n".encode())
